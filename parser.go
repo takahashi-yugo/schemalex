@@ -1096,9 +1096,10 @@ func (p *Parser) parseColumnIndexFullTextKey(ctx *parseCtx, index model.Index) e
 		return newParseError(ctx, t, "expected FULLTEXT")
 	}
 
-	// optional INDEX
+	// optional INDEX, Key
 	ctx.skipWhiteSpaces()
-	if t := ctx.peek(); t.Type == INDEX {
+	switch t := ctx.peek(); t.Type {
+	case KEY, INDEX:
 		ctx.advance()
 	}
 
